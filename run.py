@@ -90,6 +90,19 @@ def calculate_surplus_data(sales_row):
 
     return surplus_data
 
+def calculate_stock():
+    """
+    Calulates the next days recommeneded stock amount.
+
+    The stock is calculated by taking the last 5 days of stock sold and divding that amount by 5.
+    We also want to add 10% to the amount it recommneds and round up to the nearest interger
+    """
+    sales = SHEET.worksheet("sales")
+    columns = []
+    for ind in range(1,7):
+        column = sales.col_values(ind)
+        columns.append(column[-5:])
+    return columns
 
 def main():
     """
@@ -102,6 +115,9 @@ def main():
     update_worksheet(new_surplus_data, "surplus")
 
 print("Welcome to Love Sandwiches Data Automation")
-main()
+# main()
+calculate_stock()
+
+sales_columns = calculate_stock()
 
 
